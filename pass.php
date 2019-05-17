@@ -1,1 +1,3 @@
-<?php echo "Universe is a program"; exit() ?>
+<?php http_response_code(404);exit() ?>
+e9269c68e85b19884203160b8c3c3983a303d871
+7a57d055dc163e70c13d99951470752463b6ab47

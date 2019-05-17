@@ -1,1 +1,3 @@
-<?php echo "Space is not dark";exit() ?>
+<?php http_response_code(404);exit() ?>
+Sololearn
+Space

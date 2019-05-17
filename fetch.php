@@ -3,10 +3,12 @@
 function jumprl() {
 	if(isset($_POST['access'])) {
 		if($_POST['access'] !== "realworld") {
+			http_response_code(404);
 			echo "World is Awesome, isn't it?";
 			exit();
 		}
 	}else {
+		http_response_code(404);
 		echo "I love you, Love is blind";
 		exit();
 	}
@@ -80,7 +82,7 @@ if(isset($_POST['query'])) {
 
 		#echo new string("1");
 		for($l=1;$l<count($usrs);$l++) {
-			if($iu == trim($usrs[$l])) {
+			if(strtolower($iu) == strtolower(trim($usrs[$l]))) {
 				if(hash('sha1',$ip) == trim($pass[$l])) {
 					echo 1;
 					exit();
@@ -92,9 +94,11 @@ if(isset($_POST['query'])) {
 		echo -1;
 		exit();
 	}else {
+		http_response_code(404);
 		echo "Creator of universe is imperfect but GOD is truely perfect";
 		exit();
 	}
 }
+http_response_code(404);
 echo "Oops...";
 ?>

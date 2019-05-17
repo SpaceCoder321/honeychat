@@ -1,0 +1,63 @@
+html {
+	width: 100%;
+	height: 100%;
+	font-family: sans,sans-serif;
+}
+.container > .login > .tasktitle:before {
+	content: "login";
+	text-transform: uppercase;
+	font-size: 2em;
+	color: #000;
+	display: block;
+	text-align: center;
+}
+.container > .newuser > .tasktitle:before {
+	content: "New User";
+	text-transform: uppercase;
+	font-size: 2em;
+	color: #000;
+	display: block;
+	text-align: center;
+}
+.container {
+	width: 100%;
+	height: 100%;
+}
+body {
+	background: #333;
+	color: #FFF;
+	width: 100%;
+	height: 100%;
+}
+.login {
+	width: 350px;
+	height: 350px;
+	margin: auto;
+	background: #FFF;
+	color: #000;
+}
+[name=uname],[name=upass] {
+	display: block;
+	margin-top: 2%;
+	width: 70%;
+	margin: auto;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	padding: 2%;
+	border: hidden;
+	border-bottom: 2px solid #9E9E9E;
+	font-size: 1em;
+}
+
+#submit {
+	display: block;
+	margin: auto;
+	border: hidden;
+	background: linear-gradient(#008aff,#9ac7ff);
+	padding: 5%;
+	padding-bottom: 5%;
+	margin-bottom: 5%;
+	color: #FFF;
+	font-weight: 900;
+	border-radius: 15px;
+}
