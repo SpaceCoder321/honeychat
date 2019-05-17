@@ -5,6 +5,7 @@
 		console.log("Document initialized");
 		init();
 		$("form").on("submit", function (ev) {
+			$("#submit").html("Loading ... ");
 			ev.preventDefault();
 			frd = {
 				n: doc.forms[0].uname.value
@@ -15,12 +16,16 @@
 						logged();
 					} else {
 						alert(rrd);
+						$("#submit").html("Submit");
 					}
 				})
 			}
 		});
+		try {
+			document.querySelectorAll("body > div:nth-child(12)")[0].style.display = "none";
+		}catch(e) {}
 		$("#backlist").click(function () {
-			$("#room .textmessages").hide();
+			$("#room .textmessages").hide().empty();
 			$(".users").show();
 			$(".backbtn").hide();
 			$("#room .subtitle").hide();
@@ -57,7 +62,7 @@ var submitf = function (dw) {
 	var upass = form.upass.value;
 	if (form.getAttribute("name") != "login") {
 		newuser_submit();
-		return;
+		return true;
 	}
 	lgn(uname, upass, function (d) {
 		var rdt = parseInt(d.trim());
@@ -120,6 +125,7 @@ var newuser_submit = function () {
 		} else {
 			alert("User already exists");
 		}
+		$("#submit").html("Submit");
 	});
 }
 var init = function () {
@@ -166,7 +172,7 @@ var init = function () {
 					suc2(data, succ);
 				});
 			} else {
-				suc("User already Exists");;
+				suc("User already Exists");
 
 			}
 		});
@@ -230,6 +236,7 @@ var init = function () {
 var logged = function () {
 	cusr = frd;
 	System.getUID(cusr.n, function (id) {
+		$("#submit").html("Submit");
 		cuid = id;
 		document.forms[0].remove();
 		alert("Logged in!!");
@@ -296,12 +303,14 @@ var nagin = function () {
 				var disinh = this.innerHTML;
 				$("#room .subtitle").html(disinh);
 				$("#room .backbtn").show();
+				$("#room .textmessages").html("Loading...")
 				$("#room .textmessages").show();
 				$("#room .subtitle").show();
 				System.getUID(disinh, function (id) {
 					curch = id;
 					curry = [];
 					$("#room .textmessages").empty();
+					$("#room .textmessages").html("Loading...")
 					revent = setInterval(listit, 500);
 				});
 			});
@@ -329,13 +338,15 @@ var setEvents = function () {
 				curch = id;
 				curry = [];
 				$("#room .textmessages").empty();
+				$("#room .textmessages").html("<div class='ld'>Loading...</div>");
+				listit2();
 				revent = setInterval(listit, 500);
 			});
 		});
 	}
 	$(".sendbtn").click(function () {
 		var vl = $("#sendm").val().trim();
-		
+
 		if (vl.trim() == "") {
 			return;
 		}
@@ -361,6 +372,36 @@ var listit = function () {
 	System.listMsg(cuid, curch, function (rdat) {
 		var sptd = rdat.trim().split("\n");
 		var room = el("#room .textmessages")[0];
+		var orm, trum, parela;
+		sptd.forEach(function (x) {
+			orm = x.trim().split(' ');
+			parela = [];
+			for (var s = 2, sl = orm.length; s < sl; s++) {
+				parela[s - 2] = orm[s];
+			}
+			parela = parela.join(' ');
+			if (!curry.includes(x)) {
+				curry.push(x);
+				if (orm[0] == cuid) {
+					let snt = document.createElement("sent");
+					snt.textContent = parela;
+					room.appendChild(snt);
+					
+				} else if (orm[0] == curch) {
+					let resc = document.createElement("resc");
+					resc.textContent = parela;
+					room.appendChild(resc);
+				}
+				window.scrollBy(0, window.innerHeight);
+			}
+		});
+	});
+}
+var listit2 = function () {
+	System.listMsg(cuid, curch, function (rdat) {
+		var sptd = rdat.trim().split("\n");
+		var room = el("#room .textmessages")[0];
+		room.innerHTML = "";
 		var orm, trum, parela;
 		sptd.forEach(function (x) {
 			orm = x.trim().split(' ');
