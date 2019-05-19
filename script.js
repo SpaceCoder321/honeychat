@@ -271,7 +271,7 @@ var listusrs = function () {
 		for (var u = 0, ln = uray.length; u < ln; u++) {
 			if (uray[u].toLowerCase() != cusr.n.toLowerCase()) {
 				nodes = document.createElement("li");
-				nodes.innerHTML = uray[u];
+				nodes.textContent = uray[u];
 				addat.appendChild(nodes);
 			}
 		}
@@ -287,7 +287,7 @@ var nagin = function () {
 		for (var u = 0, ln = uray.length; u < ln; u++) {
 			if (uray[u].toLowerCase() != cusr.n.toLowerCase()) {
 				nodes = document.createElement("li");
-				nodes.innerHTML = uray[u];
+				nodes.textContent = uray[u];
 				addat.appendChild(nodes);
 			}
 		}
@@ -310,7 +310,6 @@ var nagin = function () {
 					curch = id;
 					curry = [];
 					$("#room .textmessages").empty();
-					$("#room .textmessages").html("Loading...")
 					revent = setInterval(listit, 500);
 				});
 			});
@@ -338,7 +337,6 @@ var setEvents = function () {
 				curch = id;
 				curry = [];
 				$("#room .textmessages").empty();
-				$("#room .textmessages").html("<div class='ld'>Loading...</div>");
 				listit2();
 				revent = setInterval(listit, 500);
 			});
